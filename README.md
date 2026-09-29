@@ -1,8 +1,9 @@
 # Sentinel Graph: Real-Time Cross-Rail Mule Interception Engine
 
+> **Team Name:** sudo save  
 > **Drunix Hackathon Submission** | Citi x NPCI  
 > **Track:** Fraud Detection  
-> **Problem Statement:** Real-Time Payments & Financial Inclusion  
+> **Problem Statement:** Real-Time Payments  
 
 ---
 
