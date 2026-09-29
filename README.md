@@ -1,25 +1,25 @@
 # Sentinel Graph: Real-Time Cross-Rail Mule Interception Engine
 
-> **Drunix Hackathon Submission** | NPCI x Citi Track
-> **Problem Statement:** Real-Time Payments & Financial Inclusion
+> **Drunix Hackathon Submission** | NPCI x Citi Track  
+> **Problem Statement:** Real-Time Payments & Financial Inclusion  
 
 ---
 
-## ?? Executive Summary
+## Executive Summary
 Sentinel Graph is a parallel stream intelligence engine that intercepts automated money-mule transfers across domestic payment rails (NPCI UPI / Drunix permissioned ledger) and cross-border gateways (Citi) in under 150ms without adding latency to core payment locks.
 
 ---
 
-## ??? System Architecture & Drunix Integration
+## System Architecture & Drunix Integration
 
 ```
-[ UPI Switch / Drunix Ledger ] --(Async Kafka Stream)----> [ Sentinel Graph Engine ]
-                                                                ³
-                                                  (GraphSAGE Risk Assessment)
-                                                                ³
-                                                      (Risk Score > 0.85)
-                                                                
-[ Target Bank / ATM Endpoint ] <--(Quarantine Hold API)----------Ù
+[ UPI Switch / Drunix Ledger ] --(Async Kafka Stream)--> [ Sentinel Graph Engine ]
+                                                                 |
+                                                   (GraphSAGE Risk Assessment)
+                                                                 |
+                                                       (Risk Score > 0.85)
+                                                                 v
+[ Target Bank / ATM Endpoint ] <-- (Quarantine Hold API) ---------+
 ```
 
 ### Core Architecture Components:
@@ -29,7 +29,7 @@ Sentinel Graph is a parallel stream intelligence engine that intercepts automate
 
 ---
 
-## ??? Technology Stack
+## Technology Stack
 - **Blockchain / DLT:** Drunix Permissioned Ledger (Hyperledger Fabric architecture), Go Chaincode
 - **AI / ML Engine:** PyTorch Geometric (GraphSAGE), NetworkX, Memgraph
 - **Stream & API:** Apache Kafka, Redis, FastAPI, Python 3.11
@@ -37,8 +37,8 @@ Sentinel Graph is a parallel stream intelligence engine that intercepts automate
 
 ---
 
-## ?? 44-Day Implementation Roadmap
+## 44-Day Implementation Roadmap
 - [x] **Phase 1 (Week 1):** Architecture spec, repository initialization, and synthetic AML data generator.
-- [ ] **Phase 2 (Weeks 2-3):** Drunix Go chaincode setup & SHA-256 state database mapping.
-- [ ] **Phase 3 (Weeks 4-5):** GraphSAGE model training on multi-hop mule transaction graphs.
+- [ ] **Phase 2 (Weeks 2â€“3):** Drunix Go chaincode setup & SHA-256 state database mapping.
+- [ ] **Phase 3 (Weeks 4â€“5):** GraphSAGE model training on multi-hop mule transaction graphs.
 - [ ] **Phase 4 (Week 6):** FastAPI stream integration & Streamlit real-time visual command center.
