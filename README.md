@@ -13,19 +13,30 @@ Sentinel Graph is a parallel stream intelligence engine that intercepts automate
 
 ## System Architecture & Drunix Integration
 
-```
-+------------------------------+     Async Kafka Stream      +------------------------+
-| UPI Switch / Drunix Ledger   | --------------------------> | Sentinel Graph Engine  |
-+------------------------------+                             +------------------------+
-                                                                         |
-                                                              (GraphSAGE Risk Assessment)
-                                                                         |
-                                                                (Risk Score > 0.85)
-                                                                         |
-                                                                         v
-+------------------------------+   Quarantine Hold API       +------------------------+
-| Target Bank / ATM Endpoint   | <-------------------------- | FastAPI Interceptor    |
-+------------------------------+                             +------------------------+
+```mermaid
+flowchart TD
+    subgraph Rail [Payment Rail Infrastructure]
+        A[Core Switch: NPCI UPI / Citi Gateway / Drunix Ledger]
+    end
+
+    subgraph Sidecar [Parallel Stream Processing - Sub-150ms]
+        B[Apache Kafka / Redis Event Stream]
+        C[Stateful Graph Engine - Memory Topologies]
+        D[PyTorch GraphSAGE Model - Node Feature Extraction]
+        E[FastAPI Interceptor Microservice]
+    end
+
+    subgraph Enforcement [Action & Monitoring Layer]
+        F[Destination Bank / ATM Cash-Out Gate]
+        G[Streamlit Visual Command Center]
+    end
+
+    A -->|1. Async Transaction Event| B
+    B -->|2. Ingest Stream| C
+    C -->|3. Feature Vectors| D
+    D -->|4. Mule Risk Score > 0.85| E
+    E -->|5. QUARANTINE_HOLD API| F
+    E -->|6. PubSub Event Alert| G
 ```
 
 ### Core Architecture Components:
