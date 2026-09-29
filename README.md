@@ -1,6 +1,7 @@
 # Sentinel Graph: Real-Time Cross-Rail Mule Interception Engine
 
-> **Drunix Hackathon Submission** | NPCI x Citi Track  
+> **Drunix Hackathon Submission** | Citi x NPCI  
+> **Track:** Fraud Detection  
 > **Problem Statement:** Real-Time Payments & Financial Inclusion  
 
 ---
@@ -13,13 +14,18 @@ Sentinel Graph is a parallel stream intelligence engine that intercepts automate
 ## System Architecture & Drunix Integration
 
 ```
-[ UPI Switch / Drunix Ledger ] --(Async Kafka Stream)--> [ Sentinel Graph Engine ]
-                                                                 |
-                                                   (GraphSAGE Risk Assessment)
-                                                                 |
-                                                       (Risk Score > 0.85)
-                                                                 v
-[ Target Bank / ATM Endpoint ] <-- (Quarantine Hold API) ---------+
++------------------------------+     Async Kafka Stream      +------------------------+
+| UPI Switch / Drunix Ledger   | --------------------------> | Sentinel Graph Engine  |
++------------------------------+                             +------------------------+
+                                                                         |
+                                                              (GraphSAGE Risk Assessment)
+                                                                         |
+                                                                (Risk Score > 0.85)
+                                                                         |
+                                                                         v
++------------------------------+   Quarantine Hold API       +------------------------+
+| Target Bank / ATM Endpoint   | <-------------------------- | FastAPI Interceptor    |
++------------------------------+                             +------------------------+
 ```
 
 ### Core Architecture Components:
